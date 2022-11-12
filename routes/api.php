@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/test', function(Request $request){
+    $pieces = explode(",", $request->productId);
+
+    print_r($pieces);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
