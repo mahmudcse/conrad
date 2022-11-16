@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-// Route::post('/test', function(Request $request){
-//     $pieces = explode(",", $request->productId);
-//     print_r($pieces);
-// });
-
 
 
 Route::get('/products',[ProductController::class, 'index']);
@@ -35,6 +30,8 @@ Route::put('/make-customer-active/{id}',[CustomerController::class, 'restore']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update-customer/{id}', [CustomerController::class, 'update']);
+    Route::post('/place-order', [OrderController::class, 'placeOrder']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
