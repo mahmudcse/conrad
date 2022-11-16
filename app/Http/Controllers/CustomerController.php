@@ -37,6 +37,29 @@ class CustomerController extends Controller
 
     }
 
+    public function update(Request $request, $id){
+        if($id != Auth()->user()->id){
+            return 'Access denied!!';
+        }
+
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|unique:customers,email',
+            'password' => 'required|string'
+        ]);
+
+        $customer = Customer::find($id);
+
+        $customer->update([
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'password' => bcrypt($fields['password'])
+        ]);
+
+        return $customer;
+        
+    }
+
     public function destroy($id){
         return Customer::destroy($id);
     }

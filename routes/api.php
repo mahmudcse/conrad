@@ -32,7 +32,9 @@ Route::get('/customer-list', [CustomerController::class, 'index']);
 Route::delete('/make-customer-inactive/{id}',[CustomerController::class, 'destroy']);
 Route::put('/make-customer-active/{id}',[CustomerController::class, 'restore']);
 
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/update-customer/{id}', [CustomerController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
