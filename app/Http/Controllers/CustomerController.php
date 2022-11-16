@@ -10,7 +10,7 @@ class CustomerController extends Controller
     //
 
     public function index(){
-        return Customer::paginate(5);
+        return Customer::paginate(config('constants.options.RECORD_PER_PAGE'));
     }
 
     public function store(Request $request){

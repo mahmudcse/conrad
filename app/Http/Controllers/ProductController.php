@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index(){
-        return Product::paginate(5);
+        return Product::paginate(config('constants.options.RECORD_PER_PAGE'));
     }
 }

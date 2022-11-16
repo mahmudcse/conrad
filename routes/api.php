@@ -30,7 +30,10 @@ Route::put('/make-customer-active/{id}',[CustomerController::class, 'restore']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update-customer/{id}', [CustomerController::class, 'update']);
-    Route::post('/place-order', [OrderController::class, 'placeOrder']);
+
+    Route::get('/my-orders', [OrderController::class, 'index']);
+    Route::get('/order-details/{id}', [OrderController::class, 'show']);
+    Route::post('/place-order', [OrderController::class, 'store']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });
